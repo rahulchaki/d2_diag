@@ -1,0 +1,61 @@
+SNAPSHOT: "Latest Snapshot" {
+    operations: |`go
+    func Add_TXN( P1) = {
+     delete REMOVED(P1)
+     add ADDED( P1 )
+    }
+    func REMOVE_TXN( P1) = {
+     add REMOVED(P1)
+     delete ADDED( P1 )
+    }
+    func  IS_MEMBER( P1) = {
+     if( ADDED contains P1) true
+     if( REMOVED  contains P1) false
+     else NULL
+    }
+
+  `|
+    data: "Chunk i" {
+        shape: cylinder
+      grid-columns: 1
+      grid-gap: 10
+      #style.fill: transparent
+      style.stroke-width: 1
+      added: "" {
+        style.fill: transparent
+        style.stroke-width: 0
+        grid-columns: 2
+        grid-gap: 0
+        ADDED: {
+          width: 150
+          style.font-size: 20
+        }
+        values: "Set{P1, P3, ... P100}" {
+          style.font-size: 25
+          width: 350
+        }
+        label.near: top-center
+      }
+      removed: "" {
+        style.fill: transparent
+        style.stroke-width: 0
+        grid-columns: 2
+        grid-gap: 0
+        REMOVED: {
+          width: 150
+          style.font-size: 20
+        }
+        values: "Set{P10, ... P67}" {
+          style.font-size: 25
+          width: 350
+        }
+        label.near: top-center
+      }
+      label.near: outside-top-center
+      style.font-size: 25
+    }
+    
+    label.near: outside-top-center
+    style.font-size: 40
+  }
+  

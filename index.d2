@@ -4,6 +4,10 @@ classes: {
     style.fill: transparent
     style.stroke-width: 0
   }
+  invisible: {
+    style.opacity: 0
+    label: a
+  }
 }
 
 LogHorizontal: "" {
@@ -17,21 +21,40 @@ LogHorizontal: "" {
   d: ""
 }
 
-LongBitMap: "int64" {
+LongBitMap_v2:  {
+  a:|`go
+  data[] = 
+  `|
+
+}
+
+LongBitMap:  {
+  label:"int64"
   grid-rows: 1
   grid-gap: 10
-  text: "00100....1001" {
+  bits: "00100....1001" {
     shape: text
   }
   label.near: outside-top-center
 }
-Chunck: "2^32 bits" {
+Chunck_Compressed: "2^32 bits" {
   grid-columns: 2
   grid-gap: 10
   bits: "00111....1001;" {
     shape: text
   }
   size: "Compressed" {
+    shape: text
+  }
+  label.near: outside-top-center
+}
+Chunck_Raw: "2^32 bits" {
+  grid-columns: 2
+  grid-gap: 10
+  bits: "00111....1001;" {
+    shape: text
+  }
+  size: "Uncompressed" {
     shape: text
   }
   label.near: outside-top-center

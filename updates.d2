@@ -3,12 +3,14 @@ classes: {
 }
 Updates: "Write path" {
   grid-columns: 2
-  Ingress: "Ingress" {
+  Events: "Updates" {
+    grid-columns:1
+    
     update1: "Person Attribute Updated"
-    update2
   }
   indexes: @indexes.Condition
-  Ingress.update1 -> indexes.real_time.data.0
+  Events.update1 -> indexes.control.Updates
   label.near: outside-top-center
-  style.font-size: 40
+  style.font-size: 30
+
 }

@@ -1,8 +1,38 @@
-BATCH_INDEX: "Batch Index" {
-  grid-columns: 1
-  0: @index.Chunck
-  1: @index.Chunck
-  2: @index.Chunck
-  3: @index.Chunck
-  style.font-size: 30
+
+BATCH :" Batch Layer"{
+  grid-gap: 10
+  cache:"Cache ( OPTIONAL, LRU  ) "{
+    shape: cylinder
+    grid-columns: 1
+    0:{
+      ...@index.Chunck_Compressed
+      label:"Chunck 1" 
+    }
+    style.font-size: 20
+
+  }
+  database: "Database" {
+    shape: cylinder
+    grid-columns: 1
+  0:{
+    ...@index.Chunck_Compressed
+    label:"Chunck 1" 
+  }
+  1: {
+    ...@index.Chunck_Compressed
+    label:"Chunck 2" 
+  }
+  2: {
+    label:"........"
+    style.stroke-width:0
+    style.fill: transparent
+  }
+  3: {
+    ...@index.Chunck_Compressed
+    label:"Chunck N" 
+  }
+  style.font-size: 20
+
+  }
+  style.font-size: 40
 }

@@ -1,0 +1,116 @@
+classes: {
+  ...@index.classes
+}
+Condition: "Condition / Segment" {
+  proposed:"Proposed"{
+    grid-columns:1
+    Updates: {
+      shape: person
+      label: "Add / Remove"
+      height:100
+    }
+    Read: {
+      shape: person
+      height:100
+      label: "Is Member"
+    }
+    ReadAll:""{
+      style.fill: transparent
+      style.stroke-width: 0
+      grid-columns:1
+      grid-gap:20
+      code:|`go
+        people:= Chunk.Members()
+        for _ , p := range SNAP.REMOVED{
+            remove people(p)
+        }
+        UNION
+        SNAP.ADDED
+      `|
+      person: ""{
+        shape: person
+        style.multiple: true
+        label: "Get Members"
+      }
+      code -> person
+      label.near: outside-top-center
+    }
+    
+    label.near: outside-top-center
+    style.font-size: 30
+  }
+  data: "Data Plane"{
+    grid-columns: 1
+    vertical-gap:100
+    real_time: "" {
+      ...@snapshot.SNAPSHOT
+    }
+    batch:{
+      ...@batch_bitmap.BATCH
+    }
+    
+    label.near: outside-top-center
+    style.font-size: 35
+  }
+
+  existing:"Existing"{
+    grid-columns:1
+    Updates: {
+      shape: person
+      label: "Add / Remove"
+      height:100
+    }
+    Read: {
+      shape: person
+      height:100
+      label: "Is Member"
+    }
+    ReadAll:{
+      shape: person
+      style.multiple: true
+      label: "Get Members"
+    }
+    
+    label.near: outside-top-center
+    style.font-size: 30
+  }
+
+  existing.Updates <-> data.batch.database:{
+    label: "READ: UPDATE: WRITE"
+    style.bold:true
+  }
+
+  existing.Read <- data.batch.database
+  existing.ReadAll <- data.batch.database.0
+  existing.ReadAll <- data.batch.database.1
+  existing.ReadAll <- data.batch.database.3
+
+  data.real_time.data -> data.batch.database  :"Reconciliation( Async )"{
+    style.font-size: 25
+  }
+
+  data.batch.cache.0 <--   data.batch.database.0:{
+    style{
+      stroke-width:2
+      stroke-dash: 3
+    }
+
+  }
+
+  proposed.Updates -> data.real_time.operations
+
+  proposed.Read <- data.batch: "Not in snapshot"{
+    style{
+      stroke-width:2
+      stroke-dash: 3
+    }
+  }
+  proposed.Read <- data.real_time.operations
+
+  proposed.ReadAll.code <- data.batch
+  proposed.ReadAll.code <- data.real_time.operations
+
+  label.near: outside-top-center
+
+  style.font-size: 50
+}
