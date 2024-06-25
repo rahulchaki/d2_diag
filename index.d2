@@ -1,0 +1,38 @@
+classes: {
+  empty_shell: {
+    vertical-gap: 0
+    style.fill: transparent
+    style.stroke-width: 0
+  }
+}
+
+LogHorizontal: "" {
+  grid-rows: 1
+  grid-columns: 4
+  horizontal-gap: 0
+  vertical-gap: 0
+  a: ""
+  b: ""
+  c: ""
+  d: ""
+}
+
+LongBitMap: "int64" {
+  grid-rows: 1
+  grid-gap: 10
+  text: "00100....1001" {
+    shape: text
+  }
+  label.near: outside-top-center
+}
+Chunck: "2^32 bits" {
+  grid-columns: 2
+  grid-gap: 10
+  bits: "00111....1001;" {
+    shape: text
+  }
+  size: "Compressed" {
+    shape: text
+  }
+  label.near: outside-top-center
+}

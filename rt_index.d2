@@ -1,0 +1,29 @@
+classes: {
+  ...@index.classes
+}
+
+RT_INDEX: Real Time Index {
+  grid-rows: 2
+  grid-columns: 1
+  data: "Data" {
+    grid-rows: 1
+    grid-columns: 4
+    vertical-gap: 5
+    0: @index.LongBitMap
+    1: @index.LongBitMap
+    2: @index.LongBitMap
+    3: @index.LongBitMap
+    label.near: outside-top-center
+  }
+
+  log: "Log" {
+    grid-rows: 1
+    grid-columns: 2
+    vertical-gap: 0
+    horizontal-gap: 0
+    0: @index.LogHorizontal
+    1: @index.LogHorizontal
+    label.near: outside-top-center
+  }
+  style.font-size: 30
+}
